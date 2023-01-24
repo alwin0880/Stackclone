@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<span class="fw-bold fs-5">{{request.user}}</span>
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" value="post" class="btn btn-warning mb-5 border-dark">
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row">
+        {%for a in api%}
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    {%if a.image%}
+                    <a href="#!"><img class="card-img-top" src="{{a.image.url}}" alt="..." /></a>
+
+                    {%endif%}
+                    <div class="card-body">
+                        <div class="small text-muted">{{a.create_date}}</div>
+                        <h2 class="card-title h4">{{a.description}}</h2>
+                        <p class="card-text">{{a.user}}</p>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
+                            aliquid atque, nulla.</p>
+                        <a class="btn btn-primary" href="{%url 'questiondetail' a.id %}">Read more</a>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6"></div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+
+{%endblock%}
